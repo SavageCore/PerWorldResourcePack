@@ -1,0 +1,39 @@
+main: eu.savagecore.perworldresourcepack.PerWorldResourcePack
+version: 0.1.0
+name: PerWorldResourcePack
+depend:
+- Multiverse-Core
+author: GitHub/SavageCore
+website: https://savagecore.eu
+database: false
+description: Per world resource packs
+commands:
+  pwrp:
+    description: Generic PerWorldResourcePack Command
+    aliases:
+    - perworldresourcepack
+    permission: perworldresourcepack.help
+permissions:
+  perworldresourcepack.*:
+    default: op
+    children:
+      perworldresourcepack.clear: true
+      perworldresourcepack.debug: true
+      perworldresourcepack.set.default: true
+      perworldresourcepack.set.global: true
+      perworldresourcepack.set.world.*: true
+  perworldresourcepack.clear:
+    description: Clear Resource Pack for World
+    default: false
+  perworldresourcepack.debug:
+    description: Toggle debug output in console on or off
+    default: false
+  perworldresourcepack.help:
+    description: Print usage.
+    default: true
+  perworldresourcepack.set.default:
+    description: Set default Resource Pack.
+    default: false
+  perworldresourcepack.set.world.*:
+    description: Set Resource Pack for World.
+    default: false

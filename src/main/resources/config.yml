@@ -1,0 +1,30 @@
+###########################################
+# Config file for PerWorldResourcePack
+# All links must be direct download
+##########################################
+# Set a world to null to load default pack
+# In-game do /pwrp clear <wold_name>
+# <world_name> is optional and will clear current world otherwise
+##########################################
+# worlds:
+#     world: https://example.com/resourcepack.zip
+#     world_nether: null
+#     world_the_end: https://example.com/resourcepack2.zip
+# In-Game do /pwrp set world <world_name> https://example.com/resourcepack.zip
+###########################################
+worlds:
+    world: null
+    world_nether: null
+    world_the_end: null
+###########################################  
+# Debug mode. Prints various verbose messages to console when enabled
+# In-game do /pwrp debug <true|false>
+# <true|false> is optional and will toggle otherwise
+###########################################
+debug: false
+###########################################
+# Default Resource Pack. Loaded when entering a world which has no Resource Pack set.
+# You can extract assests folder from vanilla mincraft jar to obtain if your server does not use custom packs.
+# In-game do /pwrp set default http://example.com/default_resourcepack.zip
+###########################################
+default: http://example.com/default_resourcepack.zip
