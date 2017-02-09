@@ -167,11 +167,17 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 				}
 				// Set world command
 				if (args[1].equalsIgnoreCase("world")) {
-					if (!sender.hasPermission("perworldresourcepack.set.world." + args[2])
-							&& !sender.hasPermission("perworldresourcepack.set.world.*")) {
+					String WorldToSet;
+					if (args.length == 4) {
+						WorldToSet = args[3];
+					} else {
+						WorldToSet = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
+					}						
+					if ((!sender.hasPermission("perworldresourcepack.set.world.*") && !sender.hasPermission("perworldresourcepack.set.world." + WorldToSet))
+							|| (sender.hasPermission("perworldresourcepack.set.world.*") && !sender.hasPermission("perworldresourcepack.set.world." + WorldToSet))) {
 						sender.sendMessage(ChatPrefix + " You do not have permission -");
 						sender.sendMessage(ChatColor.YELLOW + "perworldresourcepack.set.world.*");
-						sender.sendMessage(ChatColor.YELLOW + "perworldresourcepack.set.world." + args[2]);
+						sender.sendMessage(ChatColor.YELLOW + "perworldresourcepack.set.world." + WorldToSet);
 						return false;
 					}
 					if (args.length < 3 || args.length > 4) {
@@ -179,13 +185,7 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 						sender.sendMessage(
 								"/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 						return false;
-					}
-					String WorldToSet;
-					if (args.length == 4) {
-						WorldToSet = args[3];
-					} else {
-						WorldToSet = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
-					}					
+					}				
 					if (Bukkit.getWorld(WorldToSet) == null) {
 						sender.sendMessage(ChatPrefix + " World: " + ChatColor.YELLOW + WorldToSet + ChatColor.RESET
 								+ " does not exist");
