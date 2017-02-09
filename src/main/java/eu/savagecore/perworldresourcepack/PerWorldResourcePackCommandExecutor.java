@@ -39,8 +39,8 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 			// Reload configuration before commands run
 			plugin.reloadConfig();
 
-			// If default resource pack not set or default valid then return
-			// unless user is trying to set
+			// If default resource pack not set or contains default value then
+			// return unless trying to set
 			if ((plugin.getConfig().getString("default").equals("http://example.com/default_resourcepack.zip")
 					|| !plugin.getConfig().isSet("default")) && !args[0].equalsIgnoreCase("set")) {
 				sender.sendMessage(ChatPrefix + " You must set default Resource Pack");
