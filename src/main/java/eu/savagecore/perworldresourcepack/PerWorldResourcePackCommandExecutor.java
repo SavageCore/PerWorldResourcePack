@@ -31,14 +31,16 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 				sender.sendMessage("/pwrp clear <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 				sender.sendMessage("/pwrp debug <true|false>");
 				sender.sendMessage("/pwrp set default " + ChatColor.RED + "url" + ChatColor.RESET);
-				sender.sendMessage("/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
+				sender.sendMessage("/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <"
+						+ ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 				return false;
 			}
-			
-			// Reload configuration before commands run
-			plugin.reloadConfig();	
 
-			// If default resource pack not set or default valid then return unless user is trying to set
+			// Reload configuration before commands run
+			plugin.reloadConfig();
+
+			// If default resource pack not set or default valid then return
+			// unless user is trying to set
 			if ((plugin.getConfig().getString("default").equals("http://example.com/default_resourcepack.zip")
 					|| !plugin.getConfig().isSet("default")) && !args[0].equalsIgnoreCase("set")) {
 				sender.sendMessage(ChatPrefix + " You must set default Resource Pack");
@@ -74,7 +76,7 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 				plugin.getConfig().set("worlds." + WorldToClear, null);
 				plugin.saveConfig();
 				sender.sendMessage(ChatPrefix + " Cleared resource pack of world " + ChatColor.YELLOW + WorldToClear);
-				
+
 				// If in same world as cleared then update resource pack
 				if (Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName().equals(WorldToClear)) {
 					plugin.updateResourcePack(Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName(),
@@ -120,7 +122,8 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 				sender.sendMessage("/pwrp clear <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 				sender.sendMessage("/pwrp debug <true|false>");
 				sender.sendMessage("/pwrp set default " + ChatColor.RED + "url" + ChatColor.RESET);
-				sender.sendMessage("/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
+				sender.sendMessage("/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <"
+						+ ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 				return false;
 			}
 
@@ -130,8 +133,8 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 				if (args.length < 3) {
 					sender.sendMessage(ChatPrefix + " Usage:");
 					sender.sendMessage("/pwrp set default " + ChatColor.RED + "url" + ChatColor.RESET);
-					sender.sendMessage(
-							"/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
+					sender.sendMessage("/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <"
+							+ ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 					return false;
 				}
 
@@ -172,9 +175,11 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 						WorldToSet = args[3];
 					} else {
 						WorldToSet = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
-					}						
-					if ((!sender.hasPermission("perworldresourcepack.set.world.*") && !sender.hasPermission("perworldresourcepack.set.world." + WorldToSet))
-							|| (sender.hasPermission("perworldresourcepack.set.world.*") && !sender.hasPermission("perworldresourcepack.set.world." + WorldToSet))) {
+					}
+					if ((!sender.hasPermission("perworldresourcepack.set.world.*")
+							&& !sender.hasPermission("perworldresourcepack.set.world." + WorldToSet))
+							|| (sender.hasPermission("perworldresourcepack.set.world.*")
+									&& !sender.hasPermission("perworldresourcepack.set.world." + WorldToSet))) {
 						sender.sendMessage(ChatPrefix + " You do not have permission -");
 						sender.sendMessage(ChatColor.YELLOW + "perworldresourcepack.set.world.*");
 						sender.sendMessage(ChatColor.YELLOW + "perworldresourcepack.set.world." + WorldToSet);
@@ -182,10 +187,10 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 					}
 					if (args.length < 3 || args.length > 4) {
 						sender.sendMessage(ChatPrefix + " Usage:");
-						sender.sendMessage(
-								"/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
+						sender.sendMessage("/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <"
+								+ ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 						return false;
-					}				
+					}
 					if (Bukkit.getWorld(WorldToSet) == null) {
 						sender.sendMessage(ChatPrefix + " World: " + ChatColor.YELLOW + WorldToSet + ChatColor.RESET
 								+ " does not exist");
