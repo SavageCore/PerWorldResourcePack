@@ -166,6 +166,17 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 						plugin.getLogger().info("Set default to " + args[2]);
 					}
 					sender.sendMessage(ChatPrefix + " Set default resource pack to " + ChatColor.GREEN + args[2]);
+
+					// If current world using default resource pack then
+					// updateResourcePack for user
+					String currentWorld = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
+					String worldPermissionString = "worlds." + currentWorld;
+
+					if (!plugin.getConfig().isSet(worldPermissionString) && Bukkit.getServer()
+							.getPlayer(sender.getName()).getWorld().getName().equals(currentWorld)) {
+						sender.sendMessage(ChatPrefix + " Set resource pack to " + ChatColor.GREEN + args[2]);
+						plugin.updateResourcePack(args[2], Bukkit.getServer().getPlayer(sender.getName()));
+					}
 					return true;
 				}
 				// Set world command
