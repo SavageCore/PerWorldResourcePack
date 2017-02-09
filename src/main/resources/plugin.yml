@@ -1,8 +1,6 @@
 main: eu.savagecore.perworldresourcepack.PerWorldResourcePack
 version: 0.1.0
 name: PerWorldResourcePack
-depend:
-- Multiverse-Core
 author: GitHub/SavageCore
 website: https://savagecore.eu
 database: false

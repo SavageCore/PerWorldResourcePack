@@ -3,7 +3,6 @@ package eu.savagecore.perworldresourcepack;
 import java.io.File;
 
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,12 +17,6 @@ public class PerWorldResourcePack extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
         this.getCommand("pwrp").setExecutor(new PerWorldResourcePackCommandExecutor(this));
         saveDefaultConfig();
-        for (World w : Bukkit.getServer().getWorlds()) {
-            String worldConfigPath = "worlds." + w.getName();
-            if (!getConfig().isSet(worldConfigPath)) {
-                this.getConfig().set(worldConfigPath, null);
-            }
-        }
         if (!getConfig().isSet("debug")) {
             this.getConfig().set("debug", false);
         }
