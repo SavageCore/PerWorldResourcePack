@@ -3,7 +3,7 @@
     <groupId>eu.savagecore.perworldresourcepack</groupId>
     <artifactId>PerWorldResourcePack</artifactId>
     <!-- Version is used in plugin.yml -->
-    <version>0.1.0</version>
+    <version>0.1.0-SNAPSHOT</version>
 
     <!-- Plugin Information -->
     <!-- Name, Description, and URL are used in plugin.yml -->
