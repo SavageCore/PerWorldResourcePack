@@ -18,7 +18,6 @@ permissions:
       perworldresourcepack.clear: true
       perworldresourcepack.debug: true
       perworldresourcepack.set.default: true
-      perworldresourcepack.set.global: true
       perworldresourcepack.set.world.*: true
   perworldresourcepack.clear:
     description: Clear Resource Pack for World
