@@ -30,8 +30,8 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 				sender.sendMessage("/pwrp help");
 				sender.sendMessage("/pwrp clear <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 				sender.sendMessage("/pwrp debug <true|false>");
-				sender.sendMessage("/pwrp set default url");
-				sender.sendMessage("/pwrp set world <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + "> url");
+				sender.sendMessage("/pwrp set default " + ChatColor.RED + "url" + ChatColor.RESET);
+				sender.sendMessage("/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 				return false;
 			}
 			
@@ -42,7 +42,7 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 			if ((plugin.getConfig().getString("default").equals("http://example.com/default_resourcepack.zip")
 					|| !plugin.getConfig().isSet("default")) && !args[0].equalsIgnoreCase("set")) {
 				sender.sendMessage(ChatPrefix + " You must set default Resource Pack");
-				sender.sendMessage("/pwrp set default url");
+				sender.sendMessage("/pwrp set default " + ChatColor.RED + "url" + ChatColor.RESET);
 				return false;
 			}
 
@@ -119,8 +119,8 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 				sender.sendMessage("/pwrp help");
 				sender.sendMessage("/pwrp clear <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 				sender.sendMessage("/pwrp debug <true|false>");
-				sender.sendMessage("/pwrp set default url");
-				sender.sendMessage("/pwrp set world <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + "> url");
+				sender.sendMessage("/pwrp set default " + ChatColor.RED + "url" + ChatColor.RESET);
+				sender.sendMessage("/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 				return false;
 			}
 
@@ -129,9 +129,9 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 				// Less than 3 arguments return
 				if (args.length < 3) {
 					sender.sendMessage(ChatPrefix + " Usage:");
-					sender.sendMessage("/pwrp set default url");
+					sender.sendMessage("/pwrp set default " + ChatColor.RED + "url" + ChatColor.RESET);
 					sender.sendMessage(
-							"/pwrp set world <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + "> url");
+							"/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 					return false;
 				}
 
@@ -149,12 +149,12 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 					} catch (MalformedURLException e) {
 						sender.sendMessage(ChatPrefix + " url invalid!");
 						sender.sendMessage("Usage:");
-						sender.sendMessage("/pwrp set default url");
+						sender.sendMessage("/pwrp set default " + ChatColor.RED + "url" + ChatColor.RESET + "");
 						return false;
 					} catch (IOException e) {
 						sender.sendMessage(ChatPrefix + " Connection could not be established!");
 						sender.sendMessage("Usage:");
-						sender.sendMessage("/pwrp set default url");
+						sender.sendMessage("/pwrp set default " + ChatColor.RED + "url" + ChatColor.RESET + "");
 						return false;
 					}
 					plugin.getConfig().set("default", args[2]);
@@ -165,7 +165,6 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 					sender.sendMessage(ChatPrefix + " Set default resource pack to " + ChatColor.GREEN + args[2]);
 					return true;
 				}
-
 				// Set world command
 				if (args[1].equalsIgnoreCase("world")) {
 					if (!sender.hasPermission("perworldresourcepack.set.world." + args[2])
@@ -175,47 +174,53 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 						sender.sendMessage(ChatColor.YELLOW + "perworldresourcepack.set.world." + args[2]);
 						return false;
 					}
-					if (args.length < 4) {
+					if (args.length < 3 || args.length > 4) {
 						sender.sendMessage(ChatPrefix + " Usage:");
 						sender.sendMessage(
-								"/pwrp set world <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + "> url");
+								"/pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 						return false;
 					}
-					if (Bukkit.getWorld(args[2]) == null) {
-						sender.sendMessage(ChatPrefix + " World: " + ChatColor.YELLOW + args[2] + ChatColor.RESET
+					String WorldToSet;
+					if (args.length == 4) {
+						WorldToSet = args[3];
+					} else {
+						WorldToSet = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
+					}					
+					if (Bukkit.getWorld(WorldToSet) == null) {
+						sender.sendMessage(ChatPrefix + " World: " + ChatColor.YELLOW + WorldToSet + ChatColor.RESET
 								+ " does not exist");
 						sender.sendMessage("Usage:");
 						sender.sendMessage(
-								"/pwrp set world <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + "> url");
+								"/pwrp set world url <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 						return false;
 					}
 					try {
-						URL url = new URL(args[3]);
+						URL url = new URL(args[2]);
 						URLConnection conn = url.openConnection();
 						conn.connect();
 					} catch (MalformedURLException e) {
 						sender.sendMessage(ChatPrefix + " url invalid!");
 						sender.sendMessage("Usage:");
 						sender.sendMessage(
-								"/pwrp set world <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + "> url");
+								"/pwrp set world url <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 						return false;
 					} catch (IOException e) {
 						sender.sendMessage(ChatPrefix + " Connection could not be established!");
 						sender.sendMessage("Usage:");
 						sender.sendMessage(
-								"/pwrp set world <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + "> url");
+								"/pwrp set world url <" + ChatColor.YELLOW + "world_name" + ChatColor.RESET + ">");
 						return false;
 					}
-					plugin.getConfig().set("worlds." + args[2], args[3]);
+					plugin.getConfig().set("worlds." + WorldToSet, args[2]);
 					plugin.saveConfig();
 					if (plugin.getConfig().getBoolean("debug")) {
-						plugin.getLogger().info("Set world (" + args[2] + ") to " + args[3]);
+						plugin.getLogger().info("Set world (" + WorldToSet + ") to " + args[2]);
 					}
-					sender.sendMessage(ChatPrefix + " Set resource pack of world " + ChatColor.YELLOW + args[2]
-							+ ChatColor.RESET + " to " + ChatColor.GREEN + args[3]);
+					sender.sendMessage(ChatPrefix + " Set resource pack of world " + ChatColor.YELLOW + WorldToSet
+							+ ChatColor.RESET + " to " + ChatColor.GREEN + args[2]);
 
 					// If in same world as set then update resource pack
-					if (Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName().equals(args[2])) {
+					if (Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName().equals(WorldToSet)) {
 						plugin.updateResourcePack(Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName(),
 								Bukkit.getServer().getPlayer(sender.getName()));
 					}
