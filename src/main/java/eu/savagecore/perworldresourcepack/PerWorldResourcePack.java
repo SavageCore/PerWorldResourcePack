@@ -17,8 +17,8 @@ public class PerWorldResourcePack extends JavaPlugin implements Listener {
 		saveDefaultConfig();
 		if (!getConfig().isSet("debug")) {
 			this.getConfig().set("debug", false);
+			saveConfig();
 		}
-		saveConfig();
 		if (getConfig().getBoolean("debug")) {
 			getLogger().info("PerWorldResourcePack enabled.");
 		}
