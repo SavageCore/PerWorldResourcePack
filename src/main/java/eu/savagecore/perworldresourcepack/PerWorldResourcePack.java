@@ -1,5 +1,7 @@
 package eu.savagecore.perworldresourcepack;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +22,8 @@ public class PerWorldResourcePack extends JavaPlugin implements Listener {
 			saveConfig();
 		}
 		if (getConfig().getBoolean("debug")) {
-			getLogger().info("PerWorldResourcePack enabled.");
+			getLogger().info(
+					"Version " + this.getDescription().getVersion() + " - Enabled!");
 		}
 	}
 
