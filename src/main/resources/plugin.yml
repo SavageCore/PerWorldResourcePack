@@ -34,3 +34,6 @@ permissions:
   perworldresourcepack.set.world.*:
     description: Set Resource Pack for World.
     default: false
+  perworldresourcepack.bypass.world.*:
+    descripion: Bypass resource pack loading
+    default: false
