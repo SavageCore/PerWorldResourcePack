@@ -192,7 +192,7 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 					} else if (!(sender instanceof Player)) {
 						sender.sendMessage(ChatPrefix + " You must provide " + ChatColor.YELLOW + "world_name" + ChatColor.RESET + " when sending from console");
 						sender.sendMessage("Usage:");
-						sender.sendMessage("pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " " + ChatColor.YELLOW + "world_name" + ChatColor.RESET + "");
+						sender.sendMessage("pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " " + ChatColor.YELLOW + "world_name");
 						return false;
 					} else {
 						WorldToSet = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
