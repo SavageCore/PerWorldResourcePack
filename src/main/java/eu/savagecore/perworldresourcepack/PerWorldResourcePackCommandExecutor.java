@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 	private final PerWorldResourcePack plugin;
@@ -169,13 +170,15 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 
 					// If current world using default resource pack then
 					// updateResourcePack for user
-					String currentWorld = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
-					String worldPermissionString = "worlds." + currentWorld;
+					if (sender instanceof Player) {
+						String currentWorld = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
+						String worldPermissionString = "worlds." + currentWorld;
 
-					if (!plugin.getConfig().isSet(worldPermissionString) && Bukkit.getServer()
-							.getPlayer(sender.getName()).getWorld().getName().equals(currentWorld)) {
-						sender.sendMessage(ChatPrefix + " Set resource pack to " + ChatColor.GREEN + args[2]);
-						plugin.updateResourcePack(args[2], Bukkit.getServer().getPlayer(sender.getName()));
+						if (!plugin.getConfig().isSet(worldPermissionString) && Bukkit.getServer()
+								.getPlayer(sender.getName()).getWorld().getName().equals(currentWorld)) {
+							sender.sendMessage(ChatPrefix + " Set resource pack to " + ChatColor.GREEN + args[2]);
+							plugin.updateResourcePack(args[2], Bukkit.getServer().getPlayer(sender.getName()));
+						}
 					}
 					return true;
 				}
