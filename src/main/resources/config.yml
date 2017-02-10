@@ -10,7 +10,7 @@
 #     world: https://example.com/resourcepack.zip
 #     world_nether: null
 #     world_the_end: https://example.com/resourcepack2.zip
-# In-Game do /pwrp set world <world_name> https://example.com/resourcepack.zip
+# In-Game do /pwrp set world https://example.com/resourcepack.zip <world_name>
 ###########################################
 worlds:
     world: null
