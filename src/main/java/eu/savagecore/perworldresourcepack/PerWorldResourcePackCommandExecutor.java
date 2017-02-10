@@ -189,6 +189,11 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 					String WorldToSet;
 					if (args.length == 4) {
 						WorldToSet = args[3];
+					} else if (!(sender instanceof Player)) {
+						sender.sendMessage(ChatPrefix + " You must provide " + ChatColor.YELLOW + "world_name" + ChatColor.RESET + " when sending from console");
+						sender.sendMessage("Usage:");
+						sender.sendMessage("pwrp set world " + ChatColor.RED + "url" + ChatColor.RESET + " " + ChatColor.YELLOW + "world_name" + ChatColor.RESET + "");
+						return false;
 					} else {
 						WorldToSet = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
 					}
@@ -241,9 +246,12 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 							+ ChatColor.RESET + " to " + ChatColor.GREEN + args[2]);
 
 					// If in same world as set then update resource pack
-					if (Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName().equals(WorldToSet)) {
-						plugin.updateResourcePack(Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName(),
-								Bukkit.getServer().getPlayer(sender.getName()));
+					if (sender instanceof Player) {
+						if (Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName().equals(WorldToSet)) {
+							plugin.updateResourcePack(
+									Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName(),
+									Bukkit.getServer().getPlayer(sender.getName()));
+						}
 					}
 					return true;
 				}
