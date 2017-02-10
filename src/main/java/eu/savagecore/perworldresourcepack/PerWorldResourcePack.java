@@ -1,7 +1,5 @@
 package eu.savagecore.perworldresourcepack;
 
-import java.io.File;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -63,11 +61,5 @@ public class PerWorldResourcePack extends JavaPlugin implements Listener {
             }
             player.setResourcePack(getConfig().getString("default"));
         }
-    }
-    
-    public void saveDefaultConfig() {
-        if (!new File(getDataFolder(), "config.yml").exists()) {
-            saveResource("config.yml", false);
-        }
-    }    
+    }  
 }
