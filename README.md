@@ -9,6 +9,7 @@ Tested on Spigot 1.11.2 and Java 8
 ## Commands/Permissions
 
 [Commands](https://github.com/SavageCore/PerWorldResourcePack/wiki/Commands)
+
 [Permissions](https://github.com/SavageCore/PerWorldResourcePack/wiki/Permissions)
 
 ## License
