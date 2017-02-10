@@ -15,11 +15,12 @@ import org.bukkit.entity.Player;
 public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 	private final PerWorldResourcePack plugin;
 
-	private String ChatPrefix = "[" + ChatColor.GREEN + "PerWorldResourcePack" + ChatColor.RESET + "]";
+	private String ChatPrefix;
 
 	public PerWorldResourcePackCommandExecutor(PerWorldResourcePack plugin) {
 		this.plugin = plugin; // Store the plugin in situations where you need
 								// it.
+		this.ChatPrefix = plugin.getChatPrefix();
 	}
 
 	@Override
