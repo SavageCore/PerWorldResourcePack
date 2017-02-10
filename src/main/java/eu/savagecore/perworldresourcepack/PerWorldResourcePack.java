@@ -21,8 +21,7 @@ public class PerWorldResourcePack extends JavaPlugin implements Listener {
 			saveConfig();
 		}
 		if (getConfig().getBoolean("debug")) {
-			getLogger().info(
-					"Version " + this.getDescription().getVersion() + " - Enabled!");
+			getLogger().info("Version " + this.getDescription().getVersion() + " - Enabled!");
 		}
 	}
 
