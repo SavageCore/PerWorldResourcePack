@@ -79,9 +79,11 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 				sender.sendMessage(ChatPrefix + " Cleared resource pack of world " + ChatColor.YELLOW + WorldToClear);
 
 				// If in same world as cleared then update resource pack
-				if (Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName().equals(WorldToClear)) {
-					plugin.updateResourcePack(Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName(),
-							Bukkit.getServer().getPlayer(sender.getName()));
+				if (sender instanceof Player) {
+					if (Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName().equals(WorldToClear)) {
+						plugin.updateResourcePack(Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName(),
+								Bukkit.getServer().getPlayer(sender.getName()));
+					}
 				}
 				return true;
 			}
