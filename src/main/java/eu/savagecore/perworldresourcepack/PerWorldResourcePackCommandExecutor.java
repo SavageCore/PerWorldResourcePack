@@ -12,6 +12,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import eu.savagecore.perworldresourcepack.utils.Logger;
+
 public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 	private final PerWorldResourcePack plugin;
 
@@ -166,10 +168,9 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 					}
 					plugin.getConfig().set("default", args[2]);
 					plugin.saveConfig();
-					if (plugin.getConfig().getBoolean("debug")) {
-						plugin.getLogger().info("Set default to " + args[2]);
-					}
-					sender.sendMessage(ChatPrefix + " Set default resource pack to " + ChatColor.GREEN + args[2]);
+					Logger.Log(plugin, String.format("Set default resource pack to: %s%s", ChatColor.YELLOW, args[2]));
+					sender.sendMessage(String.format("%s Set default resource pack to: %s%s", ChatPrefix,
+							ChatColor.YELLOW, args[2]));
 
 					// If current world using default resource pack then
 					// updateResourcePack for user
@@ -179,7 +180,6 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 
 						if (!plugin.getConfig().isSet(worldPermissionString) && Bukkit.getServer()
 								.getPlayer(sender.getName()).getWorld().getName().equals(currentWorld)) {
-							sender.sendMessage(ChatPrefix + " Set resource pack to " + ChatColor.GREEN + args[2]);
 							plugin.updateResourcePack(args[2], Bukkit.getServer().getPlayer(sender.getName()));
 						}
 					}
@@ -242,11 +242,10 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 					}
 					plugin.getConfig().set("worlds." + WorldToSet, args[2]);
 					plugin.saveConfig();
-					if (plugin.getConfig().getBoolean("debug")) {
-						plugin.getLogger().info("Set world (" + WorldToSet + ") to " + args[2]);
-					}
-					sender.sendMessage(ChatPrefix + " Set resource pack of world " + ChatColor.YELLOW + WorldToSet
-							+ ChatColor.RESET + " to " + ChatColor.GREEN + args[2]);
+					Logger.Log(plugin,
+							String.format("Set resource pack of %s%s%s to: %s%s", ChatColor.YELLOW, WorldToSet, ChatColor.RESET, ChatColor.RED, args[2]));
+					sender.sendMessage(String.format("%s Set resource pack of %s%s%s to: %s%s", ChatPrefix, ChatColor.YELLOW, WorldToSet, ChatColor.RESET,
+							ChatColor.RED, args[2]));
 
 					// If in same world as set then update resource pack
 					if (sender instanceof Player) {

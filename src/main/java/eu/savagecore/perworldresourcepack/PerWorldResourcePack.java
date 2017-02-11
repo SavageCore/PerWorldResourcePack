@@ -10,6 +10,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import eu.savagecore.perworldresourcepack.utils.Logger;
+
 public class PerWorldResourcePack extends JavaPlugin implements Listener {
 
 	public void onEnable() {
@@ -20,15 +22,11 @@ public class PerWorldResourcePack extends JavaPlugin implements Listener {
 			this.getConfig().set("debug", false);
 			saveConfig();
 		}
-		if (getConfig().getBoolean("debug")) {
-			getLogger().info("Version " + this.getDescription().getVersion() + " - Enabled!");
-		}
+		Logger.Log(this, String.format("Version %s - Enabled!", this.getDescription().getVersion()));
 	}
 
 	public void onDisable() {
-		if (getConfig().getBoolean("debug")) {
-			getLogger().info("PerWorldResourcePack disabled.");
-		}
+		Logger.Log(this, String.format("Version %s - Disabled.", this.getDescription().getVersion()));
 	}
 
 	@EventHandler
@@ -44,31 +42,20 @@ public class PerWorldResourcePack extends JavaPlugin implements Listener {
 	// Debug event
 	@EventHandler
 	public void onPlayerResourcePackStatusEvent(PlayerResourcePackStatusEvent event) {
-		if (getConfig().getBoolean("debug")) {
-			getLogger().info(event.getStatus().name());
-		}
+		Logger.Log(this, String.format("%s%s%s (%s%s%s): %s", ChatColor.RED, event.getPlayer().getName(), ChatColor.RESET, ChatColor.YELLOW, event.getPlayer().getWorld().getName(), ChatColor.RESET, event.getStatus().name()));
 	}
 
 	public void updateResourcePack(String world, Player player) {
 		if (player.hasPermission("perworldresourcepack.bypass.world." + world)
 				|| player.hasPermission("perworldresourcepack.bypass.world.*")) {
-			if (getConfig().getBoolean("debug")) {
-				getServer().getConsoleSender().sendMessage(
-						this.getChatPrefix() + " Bypass resource pack [" + ChatColor.GREEN + player.getName()
-								+ ChatColor.RESET + "/" + ChatColor.YELLOW + world + ChatColor.RESET + "]");
-			}
+			Logger.Log(this, String.format("Bypass: %s%s%s in %s%s%s", ChatColor.BLUE, player.getName(),
+					ChatColor.RESET, ChatColor.YELLOW, world, ChatColor.RESET));
 			return;
 		}
 		String worldPermissionString = "worlds." + world;
 		if (getConfig().isSet(worldPermissionString)) {
-			if (getConfig().getBoolean("debug")) {
-				getLogger().info("Set resource pack to: " + getConfig().getString(worldPermissionString));
-			}
 			player.setResourcePack(getConfig().getString(worldPermissionString));
 		} else {
-			if (getConfig().getBoolean("debug")) {
-				getLogger().info("Set resource pack to default (" + getConfig().getString("default") + ")");
-			}
 			player.setResourcePack(getConfig().getString("default"));
 		}
 	}
