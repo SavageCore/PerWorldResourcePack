@@ -7,10 +7,38 @@ database: false
 description: Per world resource packs
 commands:
   pwrp:
-    description: Generic PerWorldResourcePack Command
     aliases:
     - perworldresourcepack
-    permission: perworldresourcepack.help
+  pwrp help:
+    description: Display Usage Tips
+    usage: /pwrp help
+    aliases:
+    - perworldresourcepack help
+    permission: perworldresourcepack.help    
+  pwrp clear:
+    description: Clear resource pack of world
+    usage: /pwrp clear <world_name>
+    aliases:
+    - perworldresourcepack clear
+    permission: perworldresourcepack.clear       
+  pwrp debug:
+    description: Toggle debug mode
+    usage: /pwrp debug <true|false>
+    aliases:
+    - perworldresourcepack debug
+    permission: perworldresourcepack.debug    
+  pwrp set default:
+    description: Set default resource pack
+    usage: /pwrp set default <url>
+    aliases:
+    - perworldresourcepack set default
+    permission: perworldresourcepack.set.default     
+  pwrp set world:
+    description: Set resource pack of world
+    usage: /pwrp set world <url> <world_name>
+    aliases:
+    - perworldresourcepack set default
+    permission: perworldresourcepack.set.world.*       
 permissions:
   perworldresourcepack.*:
     default: op
