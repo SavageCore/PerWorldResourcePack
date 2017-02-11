@@ -27,6 +27,8 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		Player player = (Player) sender;
+		String PlayerWorld = player.getWorld().getName();
 		if (cmd.getName().equalsIgnoreCase("pwrp")) {
 			// If no arguments set return
 			if (args.length < 1 || args.length > 4) {
@@ -83,9 +85,8 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 
 				// If in same world as cleared then update resource pack
 				if (sender instanceof Player) {
-					if (Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName().equals(WorldToClear)) {
-						plugin.updateResourcePack(Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName(),
-								Bukkit.getServer().getPlayer(sender.getName()));
+					if (PlayerWorld.equals(WorldToClear)) {
+						plugin.updateResourcePack(PlayerWorld, player);
 					}
 				}
 				return true;
@@ -175,12 +176,10 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 					// If current world using default resource pack then
 					// updateResourcePack for user
 					if (sender instanceof Player) {
-						String currentWorld = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
-						String worldPermissionString = "worlds." + currentWorld;
+						String worldPermissionString = "worlds." + player.getWorld().getName();
 
-						if (!plugin.getConfig().isSet(worldPermissionString) && Bukkit.getServer()
-								.getPlayer(sender.getName()).getWorld().getName().equals(currentWorld)) {
-							plugin.updateResourcePack(args[2], Bukkit.getServer().getPlayer(sender.getName()));
+						if (!plugin.getConfig().isSet(worldPermissionString)) {
+							plugin.updateResourcePack(player.getWorld().getName(), player);
 						}
 					}
 					return true;
@@ -242,17 +241,15 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 					}
 					plugin.getConfig().set("worlds." + WorldToSet, args[2]);
 					plugin.saveConfig();
-					Logger.Log(plugin,
-							String.format("Set resource pack of %s%s%s to: %s%s", ChatColor.YELLOW, WorldToSet, ChatColor.RESET, ChatColor.RED, args[2]));
-					sender.sendMessage(String.format("%s Set resource pack of %s%s%s to: %s%s", ChatPrefix, ChatColor.YELLOW, WorldToSet, ChatColor.RESET,
-							ChatColor.RED, args[2]));
+					Logger.Log(plugin, String.format("Set resource pack of %s%s%s to: %s%s", ChatColor.YELLOW,
+							WorldToSet, ChatColor.RESET, ChatColor.RED, args[2]));
+					sender.sendMessage(String.format("%s Set resource pack of %s%s%s to: %s%s", ChatPrefix,
+							ChatColor.YELLOW, WorldToSet, ChatColor.RESET, ChatColor.RED, args[2]));
 
 					// If in same world as set then update resource pack
 					if (sender instanceof Player) {
-						if (Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName().equals(WorldToSet)) {
-							plugin.updateResourcePack(
-									Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName(),
-									Bukkit.getServer().getPlayer(sender.getName()));
+						if (player.getWorld().getName().equals(WorldToSet)) {
+							plugin.updateResourcePack(player.getWorld().getName(), player);
 						}
 					}
 					return true;
