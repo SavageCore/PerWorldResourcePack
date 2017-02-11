@@ -70,7 +70,7 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 				if (args.length == 2) {
 					WorldToClear = args[1];
 				} else {
-					WorldToClear = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
+					WorldToClear = PlayerWorld;
 				}
 				if (Bukkit.getWorld(WorldToClear) == null) {
 					sender.sendMessage(ChatPrefix + " World: " + ChatColor.YELLOW + WorldToClear + ChatColor.RESET
@@ -176,10 +176,10 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 					// If current world using default resource pack then
 					// updateResourcePack for user
 					if (sender instanceof Player) {
-						String worldPermissionString = "worlds." + player.getWorld().getName();
+						String worldPermissionString = "worlds." + PlayerWorld;
 
 						if (!plugin.getConfig().isSet(worldPermissionString)) {
-							plugin.updateResourcePack(player.getWorld().getName(), player);
+							plugin.updateResourcePack(PlayerWorld, player);
 						}
 					}
 					return true;
@@ -197,7 +197,7 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 								+ ChatColor.YELLOW + "world_name");
 						return false;
 					} else {
-						WorldToSet = Bukkit.getServer().getPlayer(sender.getName()).getWorld().getName();
+						WorldToSet = PlayerWorld;
 					}
 					if ((!sender.hasPermission("perworldresourcepack.set.world.*")
 							&& !sender.hasPermission("perworldresourcepack.set.world." + WorldToSet))
@@ -248,8 +248,8 @@ public class PerWorldResourcePackCommandExecutor implements CommandExecutor {
 
 					// If in same world as set then update resource pack
 					if (sender instanceof Player) {
-						if (player.getWorld().getName().equals(WorldToSet)) {
-							plugin.updateResourcePack(player.getWorld().getName(), player);
+						if (PlayerWorld.equals(WorldToSet)) {
+							plugin.updateResourcePack(PlayerWorld, player);
 						}
 					}
 					return true;
