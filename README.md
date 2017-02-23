@@ -10,7 +10,7 @@ Tested on Spigot 1.11.2 and Java 8
 
 [Last Successful Build](https://ci.savagecore.eu/job/PerWorldResourcePack/lastSuccessfulBuild/)
 
-[Releases](https://github.com/SavageCore/PerWorldResourcePack/releases)
+[Releases](https://github.com/SavageCore/PerWorldResourcePack/releases/latest)
 
 ## Wiki
 
