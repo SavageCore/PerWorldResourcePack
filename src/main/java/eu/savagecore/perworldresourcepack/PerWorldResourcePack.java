@@ -42,7 +42,10 @@ public class PerWorldResourcePack extends JavaPlugin implements Listener {
 	// Debug event
 	@EventHandler
 	public void onPlayerResourcePackStatusEvent(PlayerResourcePackStatusEvent event) {
-		Logger.Log(this, String.format("%s%s%s (%s%s%s): %s", ChatColor.RED, event.getPlayer().getName(), ChatColor.RESET, ChatColor.YELLOW, event.getPlayer().getWorld().getName(), ChatColor.RESET, event.getStatus().name()));
+		Logger.Log(this,
+				String.format("%s%s%s (%s%s%s): %s", ChatColor.RED, event.getPlayer().getName(), ChatColor.RESET,
+						ChatColor.YELLOW, event.getPlayer().getWorld().getName(), ChatColor.RESET,
+						event.getStatus().name()));
 	}
 
 	public void updateResourcePack(String world, Player player) {
