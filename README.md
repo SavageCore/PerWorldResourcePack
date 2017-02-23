@@ -2,7 +2,7 @@
 
 [![Travis Build Status](https://travis-ci.org/SavageCore/PerWorldResourcePack.svg?branch=master)](https://travis-ci.org/SavageCore/PerWorldResourcePack) [![Jenkins Build Status](https://ci.savagecore.eu/job/PerWorldResourcePack/badge/icon)](https://ci.savagecore.eu/job/PerWorldResourcePack/)
 
-Allows you to set a Resource Pack per world
+Allows you to set a Resource Pack per world. You can also [bypass](https://github.com/SavageCore/PerWorldResourcePack/wiki/Permissions#bypass-permissions) a resource pack per world via permissions.
 
 ## Download
 
