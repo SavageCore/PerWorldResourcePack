@@ -4,8 +4,6 @@
 
 Allows you to set a Resource Pack per world
 
-Tested on Spigot 1.11.2 and Java 8
-
 ## Download
 
 [Last Successful Build](https://ci.savagecore.eu/job/PerWorldResourcePack/lastSuccessfulBuild/)
