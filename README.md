@@ -1,6 +1,6 @@
 ## PerWorldResourcePack
 
-[![Build Status](https://travis-ci.org/SavageCore/PerWorldResourcePack.svg?branch=master)](https://travis-ci.org/SavageCore/PerWorldResourcePack)
+[![Travis Build Status](https://travis-ci.org/SavageCore/PerWorldResourcePack.svg?branch=master)](https://travis-ci.org/SavageCore/PerWorldResourcePack) [![Jenkins Build Status](https://ci.savagecore.eu/job/PerWorldResourcePack/badge/icon)](https://ci.savagecore.eu/job/PerWorldResourcePack/)
 
 Allows you to set a Resource Pack per world
 
