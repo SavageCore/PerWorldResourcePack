@@ -46,8 +46,8 @@ public class PerWorldResourcePack extends JavaPlugin implements Listener {
 	}
 
 	public void updateResourcePack(String world, Player player) {
-		if (player.hasPermission("perworldresourcepack.bypass.world." + world)
-				|| player.hasPermission("perworldresourcepack.bypass.world.*")) {
+		if ((player.hasPermission("perworldresourcepack.bypass.world." + world)
+				|| player.hasPermission("perworldresourcepack.bypass.world.*")) && !player.isOp()) {
 			Logger.Log(this, String.format("Bypass: %s%s%s in %s%s%s", ChatColor.BLUE, player.getName(),
 					ChatColor.RESET, ChatColor.YELLOW, world, ChatColor.RESET));
 			return;
